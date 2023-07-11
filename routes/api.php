@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::controller(UserController::class)->group(function() {
-    // Route::post('/register', 'store');
+    Route::post('/register', 'store');
     Route::post('/login', 'loginUser');
 });
 
