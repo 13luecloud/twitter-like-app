@@ -16,6 +16,10 @@ class FollowRepository implements FollowRepositoryInterface
             'follower_id'   => $user->account_handle,
             'following_id'  => $data['account_handle']
         ];
+
+        Follow::create($followRelationship);
+
+        return $this->getUpdatedFollowing($user->account_handle, $data['account_handle']);
     }
 
     public function unfollowUser(array $data)
@@ -28,5 +32,18 @@ class FollowRepository implements FollowRepositoryInterface
         ])->first(); 
 
         $followingRelationship->delete();
+        
+        return $this->getUpdatedFollowing($user->account_handle, $data['account_handle']);
+    }
+
+    private function getUpdatedFollowing(String $userAccountHandle, String $targetAccountHandle)
+    {
+        $userFollowing = Follow::where('follower_id', $userAccountHandle)->get();
+        $targetFollowers = Follow::where('following_id', $targetAccountHandle)->get();
+
+        return [
+            'user_following' => $userFollowing, 
+            'target_followers' => $targetFollowers,
+        ];
     }
 }
