@@ -6,6 +6,7 @@ use App\Http\Requests\LoginUserRequest;
 use App\Http\Repositories\User\UserRepositoryInterface; 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,6 +19,13 @@ class UserController extends Controller
     public function loginUser(LoginUserRequest $request)
     {
         return response()->success('Successfully logged in user', $this->repository->loginUser($request->validated()));        
+    }
+
+    public function logoutUser()
+    {
+        Auth::user()->currentAccessToken()->delete();
+        
+        return response()->success('Successfully logged out user');
     }
 
     public function index()
