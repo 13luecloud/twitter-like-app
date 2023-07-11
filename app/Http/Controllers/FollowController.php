@@ -22,4 +22,12 @@ class FollowController extends Controller
             $this->repository->followUser($request->validated()),
         );
     }
+
+    public function unfollowUser(UserAccountHandleRequest $request)
+    {
+        return response()->success(
+            'Successfully unfollowed user',
+            $this->repository->unfollowUser($request->validated()),
+        );
+    }
 }

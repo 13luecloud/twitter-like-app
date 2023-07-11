@@ -16,7 +16,17 @@ class FollowRepository implements FollowRepositoryInterface
             'follower_id'   => $user->account_handle,
             'following_id'  => $data['account_handle']
         ];
+    }
 
-        return Follow::create($followRelationship);
+    public function unfollowUser(array $data)
+    {
+        $user = Auth::user(); 
+
+        $followingRelationship = Follow::where([
+            ['follower_id', $user->account_handle], 
+            ['following_id', $data['account_handle']]
+        ])->first(); 
+
+        $followingRelationship->delete();
     }
 }

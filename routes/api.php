@@ -24,7 +24,7 @@ Route::controller(UserController::class)->group(function() {
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::controller(FollowController::class)->group(function() {
         Route::post('/follow', 'followUser');
-        // Route::delete('/unfollow', 'unfollowUser');
+        Route::delete('/unfollow', 'unfollowUser');
     });
 
     Route::post('/logout', [UserController::class, 'logoutUser']);
