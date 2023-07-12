@@ -23,12 +23,11 @@ class TweetRepository implements TweetRepositoryInterface
         ];
         $tweet = Tweet::create($tweet);
 
-        if(sizeOf($data['attachment']) > 0) {
-            $attachments = $this->saveAttachment($data['attachment'], $tweet->id);
-            
-            return [$tweet, $attachments];        
+        if(array_key_exists('attachment', $data)) {
+           $this->saveAttachment($data['attachment'], $tweet->id);
         }
 
+        $attachment = $tweet->attachments;
         return $tweet;
     }
 
@@ -39,12 +38,16 @@ class TweetRepository implements TweetRepositoryInterface
         $followRepo = new FollowRepository();
         $followRepo->isFollowing($accountHandle);
 
-        return $user->tweets;
+        $tweets = $user->tweets; 
+        foreach($tweets as $tweet) {
+            $attachments = $tweet->attachments; 
+        }
+
+        return $tweets; 
     }
 
     private function saveAttachment(array $attachments, int $tweetId) 
     {
-        $savedAttachments = [];
         foreach($attachments as $attachment) {
             $name = $tweetId . '_' . $attachment->getClientOriginalName();
 
@@ -55,9 +58,6 @@ class TweetRepository implements TweetRepositoryInterface
             Attachment::create($toSaveAttachment);
 
             $path = Storage::putFileAs('attachments', $attachment, $name);
-            array_push($savedAttachments, $path);
         }
-
-        return $savedAttachments;
     }
 } 
