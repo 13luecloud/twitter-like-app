@@ -17,9 +17,12 @@ class TweetController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(String $account_handle)
     {
-        //
+        return response()->success(
+            "Successfully fetched all of user's tweets", 
+            $this->repository->getTweetsOfUser($account_handle)
+        );
     }
 
     /**
