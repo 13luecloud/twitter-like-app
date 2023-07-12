@@ -32,7 +32,29 @@ class TweetRepository implements TweetRepositoryInterface
         $attachment = $tweet->attachments;
         return $tweet;
     }
-    
+
+    public function updateTweet(array $data, int $tweetId)
+    {
+        $tweet = Tweet::findOrFail($tweetId);
+
+        $this->userOwnsTweet($tweetId);
+   
+        if($tweet->attachments->where('tweet_id', $tweetId)->first()) {
+            if(array_key_exists('attachment', $data)) {
+                $this->saveAttachment($data['attachments'], $tweetId);
+            }
+
+            $this->removeAttachments($tweetId);
+        }
+        
+        $tweet->text = $data['text'];
+        $tweet->save();
+        $tweet->refresh();
+
+        $attachment = $tweet->attachments;
+        return $tweet;
+    }
+
     public function deleteTweet(String $tweetId)
     {
         $tweet = Tweet::findOrFail($tweetId);
@@ -59,6 +81,10 @@ class TweetRepository implements TweetRepositoryInterface
 
     private function saveAttachment(array $attachments, int $tweetId) 
     {
+        if(Tweet::find($tweetId)->attachments) {
+            $this->removeAttachments($tweetId);
+        }
+
         foreach($attachments as $attachment) {
             $name = $tweetId . '_' . $attachment->getClientOriginalName();
 
@@ -69,6 +95,13 @@ class TweetRepository implements TweetRepositoryInterface
             Attachment::create($toSaveAttachment);
 
             $path = Storage::putFileAs('attachments', $attachment, $name);
+        }
+    }
+
+    private function removeAttachments(int $tweetId)
+    {
+        foreach(Tweet::find($tweetId)->attachments as $attachment) {
+            $attachment->delete();
         }
     }
 

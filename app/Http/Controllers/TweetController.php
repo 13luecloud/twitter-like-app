@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TweetCreateRequest; 
+use App\Http\Requests\TweetCreateUpdateRequest; 
 use App\Http\Repositories\Tweet\TweetRepositoryInterface; 
 
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class TweetController extends Controller
         );
     }
 
-    public function store(TweetCreateRequest $request)
+    public function store(TweetCreateUpdateRequest $request)
     {
         return response()->success(
             'Successfully created tweet',
@@ -37,9 +37,12 @@ class TweetController extends Controller
         //
     }
 
-    public function update(Request $request, string $id)
+    public function update(TweetCreateUpdateRequest $request, string $id)
     {
-        //
+        return response()->success(
+            'Successfully updated tweet',
+            $this->repository->updateTweet($request->validated(), $id)
+        );
     }
 
     public function destroy(string $id)
