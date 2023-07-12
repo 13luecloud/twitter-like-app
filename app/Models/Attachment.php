@@ -11,7 +11,7 @@ class Attachment extends Model
 
     protected $fillable = [
         'tweet_id', 
-        'media',
+        'attachment',
      ];
 
      public function tweet()
