@@ -8,6 +8,11 @@ use App\Models\Tweet;
 
 class TweetRepository implements TweetRepositoryInterface
 {
+    public function createTweet(array $data)
+    {
+        $user = Auth::user();
+    }
+
     public function getTweetsOfUser(String $accountHandle)
     {
         $user = User::findOrFail($accountHandle);
@@ -17,4 +22,11 @@ class TweetRepository implements TweetRepositoryInterface
 
         return $user->tweets;
     }
-}
+
+    private function saveMedia(array $attachments) 
+    {
+        foreach($attachments as $attachment) {
+          
+        }
+    }
+} 
