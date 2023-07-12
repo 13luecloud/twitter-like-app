@@ -10,11 +10,11 @@ class TweetRepository implements TweetRepositoryInterface
 {
     public function getTweetsOfUser(String $accountHandle)
     {
-        User::findOrFail($accountHandle);
+        $user = User::findOrFail($accountHandle);
 
         $followRepo = new FollowRepository();
         $followRepo->isFollowing($accountHandle);
 
-        return Tweet::where('user_account_handle', $accountHandle)->get();
+        return $user->tweets;
     }
 }
