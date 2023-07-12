@@ -6,6 +6,7 @@ use App\Http\Requests\TweetCreateRequest;
 use App\Http\Repositories\Tweet\TweetRepositoryInterface; 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TweetController extends Controller
 {
@@ -43,6 +44,9 @@ class TweetController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        return response()->success(
+            'Successfully deleted tweet',
+            $this->repository->deleteTweet($id)
+        );
     }
 }

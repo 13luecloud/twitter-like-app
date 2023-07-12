@@ -2,6 +2,7 @@
 
 namespace App\Http\Repositories\Tweet; 
 
+use App\Exceptions\UserDoesNotOwnTweetException;
 use App\Http\Repositories\Follow\FollowRepository;
 use App\Models\Attachment;
 use App\Models\User; 
@@ -10,6 +11,7 @@ use App\Models\Tweet;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class TweetRepository implements TweetRepositoryInterface
 {
@@ -29,6 +31,15 @@ class TweetRepository implements TweetRepositoryInterface
 
         $attachment = $tweet->attachments;
         return $tweet;
+    }
+    
+    public function deleteTweet(String $tweetId)
+    {
+        $tweet = Tweet::findOrFail($tweetId);
+
+        $this->userOwnsTweet($tweetId);
+
+        $tweet->delete();
     }
 
     public function getTweetsOfUser(String $accountHandle)
@@ -58,6 +69,15 @@ class TweetRepository implements TweetRepositoryInterface
             Attachment::create($toSaveAttachment);
 
             $path = Storage::putFileAs('attachments', $attachment, $name);
+        }
+    }
+
+    private function userOwnsTweet(String $tweetId)
+    {
+        $user = Auth::user();
+
+        If(!$user->tweets()->find($tweetId)) {
+            throw new UserDoesNotOwnTweetException;
         }
     }
 } 
