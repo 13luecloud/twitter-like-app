@@ -39,12 +39,20 @@ class TweetRepository implements TweetRepositoryInterface
 
         $this->userOwnsTweet($tweetId);
    
+        /*
+            If tweet currently has attachments: 
+                Remove all existing attachments
+                If there exists incoming attachments, create them 
+            Else if tweet current has no attachments but has incoming attachments, 
+                Create attachments
+        */ 
         if($tweet->attachments->where('tweet_id', $tweetId)->first()) {
-            if(array_key_exists('attachment', $data)) {
-                $this->saveAttachment($data['attachments'], $tweetId);
-            }
-
             $this->removeAttachments($tweetId);
+            if(array_key_exists('attachment', $data)) {             
+                $this->saveAttachment($data['attachment'], $tweetId);
+            }
+        } else if(array_key_exists('attachment', $data)) {       
+            $this->saveAttachment($data['attachment'], $tweetId);
         }
         
         $tweet->text = $data['text'];
@@ -81,10 +89,6 @@ class TweetRepository implements TweetRepositoryInterface
 
     private function saveAttachment(array $attachments, int $tweetId) 
     {
-        if(Tweet::find($tweetId)->attachments) {
-            $this->removeAttachments($tweetId);
-        }
-
         foreach($attachments as $attachment) {
             $name = $tweetId . '_' . $attachment->getClientOriginalName();
 
@@ -101,6 +105,7 @@ class TweetRepository implements TweetRepositoryInterface
     private function removeAttachments(int $tweetId)
     {
         foreach(Tweet::find($tweetId)->attachments as $attachment) {
+            Storage::delete('attachments/' . $attachment);
             $attachment->delete();
         }
     }
