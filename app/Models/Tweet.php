@@ -16,6 +16,11 @@ class Tweet extends Model
 
      public function user()
      {
-        return $this->belongsTo(User::class, 'user_account_id');
+        return $this->belongsTo(User::class, 'user_account_handle');
+     }
+
+     public function images()
+     {
+        return $this->hasMany(Image::class);
      }
 }
