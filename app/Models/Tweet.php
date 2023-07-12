@@ -12,7 +12,6 @@ class Tweet extends Model
     protected $fillable = [
         'user_account_handle', 
         'text',
-        'media'
      ];
 
      public function user()

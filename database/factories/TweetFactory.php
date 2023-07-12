@@ -21,7 +21,6 @@ class TweetFactory extends Factory
         return [
             'user_account_handle' => User::inRandomOrder()->first()->account_handle,
             'text' => $this->faker->sentence,
-            'media' => null
         ];
     }
 }
