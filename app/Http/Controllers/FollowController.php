@@ -6,6 +6,7 @@ use App\Http\Repositories\Follow\FollowRepositoryInterface;
 use App\Http\Requests\UserAccountHandleRequest; 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
@@ -19,7 +20,7 @@ class FollowController extends Controller
     {
         return response()->success(
             'Successfully followed user',
-            $this->repository->followUser($request->validated()),
+            $this->repository->followUser($request->validated(), Auth::user()->account_handle),
         );
     }
 
@@ -27,7 +28,7 @@ class FollowController extends Controller
     {
         return response()->success(
             'Successfully unfollowed user',
-            $this->repository->unfollowUser($request->validated()),
+            $this->repository->unfollowUser($request->validated(), Auth::user()->account_handle),
         );
     }
 }
