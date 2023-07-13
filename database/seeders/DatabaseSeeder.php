@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\Follow;
+use App\Models\User;
 use App\Models\Tweet;
 
 use Illuminate\Database\Seeder;
