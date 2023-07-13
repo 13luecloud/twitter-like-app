@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Tests\\Unit\\UserUnitTest::test_unit_success_create_new_users":7,"Tests\\Unit\\UserUnitTest::test_unit_fail_create_new_users_passwords_mismatch":8},"times":{"Tests\\Unit\\UserUnitTest::test_unit_success_create_new_users":0.483,"Tests\\Unit\\UserUnitTest::test_unit_fail_create_new_users_passwords_mismatch":0.002}}
