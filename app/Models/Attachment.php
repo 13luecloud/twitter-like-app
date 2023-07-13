@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Follow extends Model
+class Attachment extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'follower_id', 
-        'following_id'
+        'tweet_id', 
+        'attachment',
      ];
+
+     public function tweet()
+     {
+        return $this->belongsTo(Tweet::class);
+     }
 }
