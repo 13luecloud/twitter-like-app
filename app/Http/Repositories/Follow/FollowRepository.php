@@ -2,6 +2,7 @@
 
 namespace App\Http\Repositories\Follow;
 
+use App\Exceptions\NotFollowingException;
 use App\Models\Follow; 
 
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,22 @@ class FollowRepository implements FollowRepositoryInterface
         $followingRelationship->delete();
         
         return $this->getUpdatedFollowing($user->account_handle, $data['account_handle']);
+    }
+
+    public function isFollowing(String $targetAccountHandle)
+    {
+        $user = Auth::user();
+
+        if($user->account_handle !== $targetAccountHandle) {
+            $isFollowing = Follow::where([
+                ['follower_id', $user->account_handle], 
+                ['following_id', $targetAccountHandle]
+            ])->first();
+    
+            if(!$isFollowing) {
+                throw new NotFollowingException;
+            }
+        }
     }
 
     private function getUpdatedFollowing(String $userAccountHandle, String $targetAccountHandle)
