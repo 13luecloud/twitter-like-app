@@ -19,7 +19,6 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $name = $this->faker->name();
-
         return [
             'account_handle' => str_replace(' ', '', $name),
             'display_name' => $name, 
