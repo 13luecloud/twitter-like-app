@@ -1,0 +1,333 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Twitter-like App",
+    "dateExported": "2023-07-14T05:55:51.080Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "24fb2fcd-34dd-4e61-b7a7-0929273fdfd7",
+            "name": "User",
+            "containerId": "",
+            "created": "2023-07-11T09:25:46.282Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "146a4b4f-7ce8-45ed-bfb0-ee972f250ab1",
+            "name": "Following",
+            "containerId": "",
+            "created": "2023-07-11T15:54:44.512Z",
+            "sortNum": 25000
+        },
+        {
+            "_id": "9df840a7-e855-4d9b-8f0b-0d2d366fcf94",
+            "name": "Tweet",
+            "containerId": "",
+            "created": "2023-07-11T13:31:03.005Z",
+            "sortNum": 30000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "58436db9-843f-40c9-a963-e782f52e79b4",
+            "colId": "c08f1d6b-7bb9-4ea0-bd85-951882f19b22",
+            "containerId": "24fb2fcd-34dd-4e61-b7a7-0929273fdfd7",
+            "name": "User Register",
+            "url": "{{base_api_url}}/register",
+            "method": "POST",
+            "sortNum": 3750,
+            "created": "2023-07-11T08:43:07.158Z",
+            "modified": "2023-07-14T05:41:28.965Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "account_handle",
+                        "value": "SampleHandle"
+                    },
+                    {
+                        "name": "display_name",
+                        "value": "Sample Name"
+                    },
+                    {
+                        "name": "biography",
+                        "value": "Sample biography looks like this "
+                    },
+                    {
+                        "name": "email",
+                        "value": "sampleemail@gmail.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "password"
+                    },
+                    {
+                        "name": "confirm_password",
+                        "value": "password"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "ead0ed03-8bbb-48a0-a8f4-a84e455f671a",
+            "colId": "c08f1d6b-7bb9-4ea0-bd85-951882f19b22",
+            "containerId": "24fb2fcd-34dd-4e61-b7a7-0929273fdfd7",
+            "name": "User Login",
+            "url": "{{base_api_url}}/login",
+            "method": "POST",
+            "sortNum": 7500,
+            "created": "2023-07-11T09:18:47.704Z",
+            "modified": "2023-07-14T05:41:47.725Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "email",
+                        "value": "kerluke.tyrel@example.net"
+                    },
+                    {
+                        "name": "password",
+                        "value": "password"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "66d7a743-000f-4955-a6d6-78818971bb36",
+            "colId": "c08f1d6b-7bb9-4ea0-bd85-951882f19b22",
+            "containerId": "24fb2fcd-34dd-4e61-b7a7-0929273fdfd7",
+            "name": "User Logout",
+            "url": "{{base_api_url}}/logout",
+            "method": "POST",
+            "sortNum": 8125,
+            "created": "2023-07-11T09:54:08.117Z",
+            "modified": "2023-07-14T05:52:12.345Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|oq3xQXMiZlLUaVj3MNVmSPmQO60CjNYmMFUKKqZS"
+            },
+            "tests": []
+        },
+        {
+            "_id": "06ddc455-1d74-467c-8194-9485daf48090",
+            "colId": "c08f1d6b-7bb9-4ea0-bd85-951882f19b22",
+            "containerId": "146a4b4f-7ce8-45ed-bfb0-ee972f250ab1",
+            "name": "Follow User",
+            "url": "{{base_api_url}}/follow",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-07-11T11:49:19.896Z",
+            "modified": "2023-07-14T05:45:32.372Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "account_handle",
+                        "value": "Dr.JenningsOrn"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|oq3xQXMiZlLUaVj3MNVmSPmQO60CjNYmMFUKKqZS"
+            },
+            "tests": []
+        },
+        {
+            "_id": "4dbc9cc2-f8b3-4298-a6cd-e706fccb73cd",
+            "colId": "c08f1d6b-7bb9-4ea0-bd85-951882f19b22",
+            "containerId": "146a4b4f-7ce8-45ed-bfb0-ee972f250ab1",
+            "name": "Unfollow User ",
+            "url": "{{base_api_url}}/unfollow",
+            "method": "DELETE",
+            "sortNum": 20000,
+            "created": "2023-07-11T12:05:25.515Z",
+            "modified": "2023-07-14T05:46:25.055Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"account_handle\" : \"Dr.JenningsOrn\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|oq3xQXMiZlLUaVj3MNVmSPmQO60CjNYmMFUKKqZS"
+            },
+            "tests": []
+        },
+        {
+            "_id": "da413725-569e-4928-bde3-1046fb0e4ac0",
+            "colId": "c08f1d6b-7bb9-4ea0-bd85-951882f19b22",
+            "containerId": "9df840a7-e855-4d9b-8f0b-0d2d366fcf94",
+            "name": "Tweet Fetch All By User ",
+            "url": "{{base_api_url}}/CamillaKilback/tweets",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-07-11T13:31:15.148Z",
+            "modified": "2023-07-14T05:49:37.964Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|oq3xQXMiZlLUaVj3MNVmSPmQO60CjNYmMFUKKqZS"
+            },
+            "tests": []
+        },
+        {
+            "_id": "82ea9cc8-6dce-4d02-a01d-1c12b0a0dbdd",
+            "colId": "c08f1d6b-7bb9-4ea0-bd85-951882f19b22",
+            "containerId": "9df840a7-e855-4d9b-8f0b-0d2d366fcf94",
+            "name": "Tweet Create",
+            "url": "{{base_api_url}}/tweet",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2023-07-12T04:24:43.736Z",
+            "modified": "2023-07-14T05:48:08.154Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "text",
+                        "value": "Created a tweet with pictures"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "attachment[0]",
+                        "value": "c:\\Users\\Admin\\Pictures\\FZXSR0_akAABv7-.jpg"
+                    },
+                    {
+                        "name": "attachment[1]",
+                        "value": "c:\\Users\\Admin\\Pictures\\Untitled.png"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|oq3xQXMiZlLUaVj3MNVmSPmQO60CjNYmMFUKKqZS"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6ffe3cc5-ae90-4585-9d26-3d3f84015638",
+            "colId": "c08f1d6b-7bb9-4ea0-bd85-951882f19b22",
+            "containerId": "9df840a7-e855-4d9b-8f0b-0d2d366fcf94",
+            "name": "Tweet Delete",
+            "url": "{{base_api_url}}/tweet/12",
+            "method": "DELETE",
+            "sortNum": 80000,
+            "created": "2023-07-12T09:32:25.653Z",
+            "modified": "2023-07-14T05:51:57.087Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|oq3xQXMiZlLUaVj3MNVmSPmQO60CjNYmMFUKKqZS"
+            },
+            "tests": []
+        },
+        {
+            "_id": "375d2bb3-695a-4637-9e27-abc34b358ad5",
+            "colId": "c08f1d6b-7bb9-4ea0-bd85-951882f19b22",
+            "containerId": "9df840a7-e855-4d9b-8f0b-0d2d366fcf94",
+            "name": "Tweet Update",
+            "url": "{{base_api_url}}/tweet/12",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2023-07-12T10:11:49.290Z",
+            "modified": "2023-07-14T05:51:15.019Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "_method",
+                        "value": "PUT"
+                    },
+                    {
+                        "name": "text",
+                        "value": "Updating a tweet with attachments with attachments, must have new attachments after"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "attachment[0]",
+                        "value": "c:\\Users\\Admin\\Pictures\\Capture.PNG"
+                    },
+                    {
+                        "name": "attachment[1]",
+                        "value": "c:\\Users\\Admin\\Pictures\\Capture-1.PNG"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|oq3xQXMiZlLUaVj3MNVmSPmQO60CjNYmMFUKKqZS"
+            },
+            "tests": []
+        }
+    ]
+}

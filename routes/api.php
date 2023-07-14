@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TweetController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +17,23 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::controller(UserController::class)->group(function() {
+    Route::post('/register', 'store');
+    Route::post('/login', 'loginUser');
+});
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    Route::controller(FollowController::class)->group(function() {
+        Route::post('/follow', 'followUser');
+        Route::delete('/unfollow', 'unfollowUser');
+    });
+
+    Route::controller(TweetController::class)->group(function() {
+        Route::post('/tweet', 'store');
+        Route::get('/{account_handle}/tweets', 'index');
+        Route::delete('/tweet/{id}', 'destroy');
+        Route::put('/tweet/{id}', 'update');
+    });
+
+    Route::post('/logout', [UserController::class, 'logoutUser']);
 });

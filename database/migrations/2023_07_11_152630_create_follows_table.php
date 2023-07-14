@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->string('account_handle')->primary();
-            $table->string('display_name');
-            $table->text('biography')->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('follows', function (Blueprint $table) {
+            $table->id();
+            $table->string('follower_id');
+            $table->foreign('follower_id')->references('account_handle')->on('users');
+            $table->string('following_id');
+            $table->foreign('following_id')->references('account_handle')->on('users');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('follows');
     }
 };
