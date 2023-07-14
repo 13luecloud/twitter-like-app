@@ -7,7 +7,6 @@ use App\Http\Repositories\Tweet\TweetRepositoryInterface;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class TweetController extends Controller
 {
